@@ -12,7 +12,7 @@ To run the sample you will need:
 The following code base contains two runnable web application servers.
 
 The first is located in the "zipkin-server" directory.
-Which should come to no, contains a Spring flavored Zipkin Stream Server.
+Which should come to no surprise, contains a Spring flavored Zipkin Stream Server.
 Allowing other applications running Spring Cloud Sleuth Stream, to send its Span information to this server.
 Provided correct configurations and an available RabbitMQ server.
 The Zipkin server will run on a different port than the well known default port.
