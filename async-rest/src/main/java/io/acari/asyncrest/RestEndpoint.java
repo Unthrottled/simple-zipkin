@@ -40,16 +40,17 @@ public class RestEndpoint {
 
     @RequestMapping("/bravo")
     public String getBravo() throws Exception {
+        String bravo = getMessage("Bravo");
         Future<String> yankee = poorMansExecutor.submit(() -> restTemplate.getForObject("http://localhost:" +PORT+ "/yankee", String.class));
-        return getMessage("Bravo");
+        return concatMessage(bravo, yankee.get());
     }
 
     @RequestMapping("/charlie")
     public String getCharlie() throws Exception {
         String charlie = getMessage("Charlie");
         Future<String> xray = poorMansExecutor.submit(() -> restTemplate.getForObject("http://localhost:" + PORT + "/xray", String.class));
-        Future<String> yankee = poorMansExecutor.submit(() -> restTemplate.getForObject("http://localhost:" +PORT+ "/zulu", String.class));
-        return concatMessage(charlie, xray.get(), yankee.get());
+        Future<String> zulu = poorMansExecutor.submit(() -> restTemplate.getForObject("http://localhost:" +PORT+ "/zulu", String.class));
+        return concatMessage(charlie, xray.get(), zulu.get());
     }
 
     @RequestMapping("/xray")
