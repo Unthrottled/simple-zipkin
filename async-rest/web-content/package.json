@@ -1,8 +1,8 @@
 {
-  "name": "Distribute_Tracing",
+  "name": "Distribute_Tracing_Simplified",
   "version": "1.0.0",
   "private": true,
-  "description": "Cool example showing off spring cloud distribute tracing tools! ",
+  "description": "Cool example showing off spring cloud distribute tracing tools without having much distribution!",
   "scripts": {
     "test:once": "karma start karma.conf.js --single-run",
     "compile": "tsc -p src/",
