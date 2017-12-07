@@ -12,7 +12,6 @@ import java.util.concurrent.Future;
 
 @RestController
 public class RestEndpoint {
-    public static final int PORT = 7866;
     private RestTemplate restTemplate;
     private PoorMansExecutor poorMansExecutor;
     private static final Logger logger = LoggerFactory.getLogger(RestEndpoint.class);
@@ -25,7 +24,7 @@ public class RestEndpoint {
 
     @RequestMapping("/get/message")
     public String doStuff() {
-        String forObject = restTemplate.getForObject("http://localhost:" + PORT + "/alpha", String.class);
+        String forObject = restTemplate.getForObject("http://localhost/alpha", String.class) + '\n';
         logger.info(forObject);
         return forObject;
     }
@@ -33,23 +32,23 @@ public class RestEndpoint {
     @RequestMapping("/alpha")
     public String getAlpha() throws Exception {
         String alpha = getMessage("Alpha");
-        Future<String> bravo = poorMansExecutor.submit(() -> restTemplate.getForObject("http://localhost:" +PORT+ "/bravo", String.class));
-        Future<String> charlie = poorMansExecutor.submit(() -> restTemplate.getForObject("http://localhost:"+PORT+"/charlie", String.class));
+        Future<String> bravo = poorMansExecutor.submit(() -> restTemplate.getForObject("http://localhost/bravo", String.class));
+        Future<String> charlie = poorMansExecutor.submit(() -> restTemplate.getForObject("http://localhost/charlie", String.class));
         return concatMessage(alpha, bravo.get(), charlie.get());
     }
 
     @RequestMapping("/bravo")
     public String getBravo() throws Exception {
         String bravo = getMessage("Bravo");
-        Future<String> yankee = poorMansExecutor.submit(() -> restTemplate.getForObject("http://localhost:" +PORT+ "/yankee", String.class));
+        Future<String> yankee = poorMansExecutor.submit(() -> restTemplate.getForObject("http://localhost/yankee", String.class));
         return concatMessage(bravo, yankee.get());
     }
 
     @RequestMapping("/charlie")
     public String getCharlie() throws Exception {
         String charlie = getMessage("Charlie");
-        Future<String> xray = poorMansExecutor.submit(() -> restTemplate.getForObject("http://localhost:" + PORT + "/xray", String.class));
-        Future<String> zulu = poorMansExecutor.submit(() -> restTemplate.getForObject("http://localhost:" +PORT+ "/zulu", String.class));
+        Future<String> xray = poorMansExecutor.submit(() -> restTemplate.getForObject("http://localhost/xray", String.class));
+        Future<String> zulu = poorMansExecutor.submit(() -> restTemplate.getForObject("http://localhost/zulu", String.class));
         return concatMessage(charlie, xray.get(), zulu.get());
     }
 
