@@ -4,5 +4,7 @@ server:
 spring:
   application:
     name: async-rest
+  rabbitmq:
+        host: rabbitmq
   zipkin:
     baseurl: http://zipkin
