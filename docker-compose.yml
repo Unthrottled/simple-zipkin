@@ -1,0 +1,20 @@
+version: "3"
+services:
+  rest-service:
+    build:
+      context: ./async-rest
+    image: alexsimons/simple-rest:1.0.0
+    ports:
+      - "7866:80"
+    depends_on:
+      - zipkin
+  zipkin:
+    build:
+      context: ./zipkin-server
+    image: alexsimons/simple-zipkin-server:1.0.0
+    ports:
+        - "7865:80"
+    depends_on:
+      - rabbitmq
+  rabbitmq:
+    image: rabbitmq:latest

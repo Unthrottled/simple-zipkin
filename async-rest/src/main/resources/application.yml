@@ -1,8 +1,8 @@
 server:
-  port: 7866
+  port: 80
 
 spring:
   application:
     name: async-rest
   zipkin:
-    baseurl: http://127.0.0.1:7865
+    baseurl: http://zipkin
