@@ -24,7 +24,7 @@ public class RestEndpoint {
 
     @RequestMapping("/")
     public String doStuff() {
-        String forObject = restTemplate.getForObject("http://localhost/alpha", String.class);
+        String forObject = restTemplate.getForObject("http://localhost/alpha", String.class) + '\n';
         logger.info(forObject);
         return forObject;
     }
