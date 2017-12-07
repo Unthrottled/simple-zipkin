@@ -23,7 +23,7 @@ public class RestEndpoint {
         this.poorMansExecutor = poorMansExecutor;
     }
 
-    @RequestMapping("/")
+    @RequestMapping("/get/message")
     public String doStuff() {
         String forObject = restTemplate.getForObject("http://localhost:" + PORT + "/alpha", String.class);
         logger.info(forObject);
