@@ -1,6 +1,8 @@
 server:
-  port: 7865
+  port: 80
 
 spring:
   application:
     name: zipkin
+  rabbitmq:
+    host: rabbitmq
