@@ -15,7 +15,7 @@ const extractSass = new ExtractTextPlugin({
 
 
 var proxyPeel = proxy('/get', {
-    target: 'http://async-rest',
+    target: 'http://rest-service',
     changeOrigin: true,               // needed for virtual hosted sites
     ws: true,
     agent: keepAliveAgent
