@@ -1,7 +1,7 @@
 # Distributed Tracing...Sort of...
 
-This project demonstrates the capabilities of Zipkin's ablity to tracing distributed Systems, without really having requests go no further than the initial server initially queried.
-Meaning that all dependencies remain on a single server.
+This project demonstrates the capabilities of Zipkin's ability to trace distributed Systems, without really having requests go no further than the server initially queried.
+Meaning that all call dependencies remain on a single server.
 
 To run the sample you will need:
   - Internet Connection (At least the first time it is run)
@@ -9,11 +9,6 @@ To run the sample you will need:
   - [Docker-Compose 1.12.0](https://docs.docker.com/compose/install/)
  
  ![Docker](https://www.docker.com/sites/default/files/Whale%20Logo332_5.png)
- 
-For those who do not want easy mode, please have these on your box. 
- - [Java 8 runtime](http://blog.acari.io/jvm/2017/05/05/Gradle-Install.html)
- - [Gradle 2.3+ ](http://blog.acari.io/jvm/2017/05/05/Gradle-Install.html)
- - [RabbitMQ](https://www.rabbitmq.com/download.html), alternatively through a [Docker Image](https://hub.docker.com/_/rabbitmq/) running on port 5672
 
 The following code base contains two runnable web application servers.
 
@@ -27,7 +22,6 @@ Meaning if you run it on your local box, then it will run on port 80.
 However in the compose project I have mapped port 80 to port 7865 on your machine.
 
 The second server is located in the "async-rest" directory.
-Which also runs on port 80, so if running locally edit the application.yml in the async-rest directory.
 This server has several HTTP GET REST endpoints exposed:
 
 - http://localhost/get/message
@@ -42,21 +36,17 @@ Which should have a trace that looks like this:
 
 ![trace](images/trace.png)
 
-To run the entire project:
+To run the entire project using docker:
 1. Open a command line with the root of this repository as the present working directory.
 1. Run `docker-compose up -d`
 
-To run the example without docker.
-1. Change the server ports (so they do not collide) in the application yaml files in both repository
-1. Open a terminal whose current working directory is the zipkin-server directory of this repository.
-1. Run `gradle bootRun`
-1. Open a terminal whose current working directory is the async-rest directory of this repository.
-1. Run `gradle bootRun`
-1. Open a web browser and enter the following address: `http://localhost:7866` assuming you changed the port for the async-rest project to 7866
+#### Open a web browser and enter the following address: `http://localhost:7866` assuming you changed the port for the async-rest project to 7866
 
 This should output something like this to the browser window
     
->Hello from Alpha @ 2017-05-21T19:38:54.601Z and Hello from Bravo @ 2017-05-21T19:38:54.612Z and Hello from Yankee @ 2017-05-21T19:38:54.619Z and Hello from Charlie @ 2017-05-21T19:38:54.614Z and Hello from XRay @ 2017-05-21T19:38:54.621Z and Hello from Zulu @ 2017-05-21T19:38:54.633Z
+![ui](images/ui.png)
+
+(provided you clicked fetch message a few times.)
 
 You should now be able to access the Zipkin UI, and have at least one trace, in a browser window as well at `http://localhost:7865/`
 
